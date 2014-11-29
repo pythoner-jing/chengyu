@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>成语速查测试页面</title>
+	<script src="/static/jquery.js"></script>
+	<style>
+	#wrapper {
+		width: 500px;
+		margin: auto;
+	}
+
+	input[type="text"] {
+		border: 1px solid #aaa;
+		padding: 5px;
+		margin: 0px;
+		font-size: 14px;
+	}
+
+	input[type="text"]:focus {
+		background: #cef;
+	}
+
+	button {
+		border: 1px solid #ccc;
+		cursor: pointer;
+		padding: 3px;
+		font-size: 14px;
+	}
+
+	#result {
+		border: 1px dashed #aaa;
+		width: 100%;
+		margin-top: 10px;
+		padding: 5px;
+		font-size: 14px;
+		color: #333;
+		line-height: 25px;
+		text-indent: 2em;
+	}
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<input type="text" id="word">
+		<button id="query">查词</button>
+		<div id="result"></div>
+	</div>
+</body>
+<script>
+$(document).ready(function(){
+	$("#word").click(function(){
+		$(this).select();
+	});
+
+	$("#query").click(function(){
+		$.post("/", {word:$("#word").val()}, function(data, status){
+			$("#result").text(data);
+		});
+
+		return false;
+	});
+});
+</script>
+</html>
